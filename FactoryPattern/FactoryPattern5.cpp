@@ -1,5 +1,6 @@
 ﻿#include <stdexcept>
 #include <iostream>
+#include <memory>
 #include <string>
 
 using namespace std;
@@ -62,7 +63,8 @@ Animal* FactoryAnimal(AnimalType type) {
     
     switch(type) {
     case AnimalType::CatType:
-        return Cat::createAnimal();
+        return make_shared<Cat>();
+        //return Cat::createAnimal();
     case AnimalType::DogType:
         return new Dog();
     case AnimalType::SheepType:
@@ -110,11 +112,15 @@ public:
 
 void someA() {
 //    Animal* pAnimal = Animal::factoryAnimal(AnimalType::CatType);
-    Animal* pAnimal = Animal::of(AnimalType::CatType);
+    //Animal* pAnimal = Animal::of(AnimalType::CatType);
 
+    //if (pAnimal) {
+    //    hey(*pAnimal);
+    //    delete pAnimal;
+    //}
+    shared_ptr<Animal> pAnimal(Animal::of(AnimalType::CatType));
     if (pAnimal) {
         hey(*pAnimal);
-        delete pAnimal;
     }
 }
 

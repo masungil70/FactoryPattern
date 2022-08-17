@@ -1,5 +1,6 @@
 ﻿#include <stdexcept>
 #include <iostream>
+#include <memory>
 #include <string>
 
 using namespace std;
@@ -110,11 +111,15 @@ public:
 
 void someA() {
 //    Animal* pAnimal = Animal::factoryAnimal(AnimalType::CatType);
-    Animal* pAnimal = Animal::of(AnimalType::CatType);
+    //Animal* pAnimal = Animal::of(AnimalType::CatType);
 
+    //if (pAnimal) {
+    //    hey(*pAnimal);
+    //    delete pAnimal;
+    //}
+    shared_ptr<Animal> pAnimal(Animal::of(AnimalType::CatType));
     if (pAnimal) {
         hey(*pAnimal);
-        delete pAnimal;
     }
 }
 
